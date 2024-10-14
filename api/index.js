@@ -12,7 +12,7 @@ const User = require("./models/User")
 const Post = require("./models/Post")
 
 const app = express();
-app.use(cors({ credentials: true, origin: "http://localhost:5174" }))
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }))
 app.use(express.json())
 app.use(cookieParser())
 app.use("/uploads", express.static(__dirname + "/uploads"))
@@ -99,4 +99,10 @@ app.get("/posts", async (req, res) => {
         .populate('author', ['username'])
         .sort({ createdAt: -1 })
         .limit(20))
+})
+
+app.get("/post/:id", async (req, res) => {
+    const { id } = req.params
+    const postDoc = await Post.findById(id).populate('author', ['username'])
+    res.json(postDoc)
 })
