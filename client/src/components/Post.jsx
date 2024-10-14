@@ -1,23 +1,23 @@
 import React from 'react'
 import {formatISO9075} from "date-fns"
 
-const Post = () => {
+const Post = ({title,summary,content,cover,createdAt,author}) => {
     return (
         <div className="post">
             <div className="image">
                 
-                    <img src="https://tse2.mm.bing.net/th?id=OIP.vheSMYN2ZYwI7g_ZxlfezgHaE-&pid=Api&P=0&h=180" alt="" />
+                    <img src={"http://localhost:3000/"+cover} alt="" loading='lazy'/>
                 
             </div>
             <div className="texts">
                 
-                    <h2>test</h2>
+                    <h2>{title}</h2>
                 
                 <p className="info">
-                    <a href="" className="author">Rishi</a>
-                    <time>23-.4-2005 18:45</time>
+                    <a href="" className="author">{author.username}</a>
+                    <time>{formatISO9075(new Date(createdAt))}</time>
                 </p>
-                <p className="summary">hello everyone</p>
+                <p className="summary">{summary}</p>
             </div>
         </div>
     )
